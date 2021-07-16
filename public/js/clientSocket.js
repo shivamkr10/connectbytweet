@@ -3,7 +3,10 @@ var connected = false;
 var socket = io()
 socket.emit("setup", userLoggedIn);
 
-socket.on("connected", () => connected = true);
+socket.on("connected", () => {
+    connected = true;
+    console.log("connected")
+});
 socket.on("message received", (newMessage) => messageReceived(newMessage));
 
 socket.on("notification received", () => {

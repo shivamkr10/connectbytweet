@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express();
-const port = 3003;
+const port = process.env.PORT || 3003;
 const middleware = require('./middleware')
-const path = require('path')
 const bodyParser = require("body-parser")
+const path = require('path');
 const mongoose = require("./database");
 const session = require("express-session");
+
 
 const server = app.listen(port, () => console.log("Server listening on port " + port));
 const io = require("socket.io")(server, { pingTimeout: 60000 });
@@ -22,7 +23,7 @@ app.use(session({
     saveUninitialized: false
 }))
 
-// Routes
+//routes
 const loginRoute = require('./routes/loginRoutes');
 const registerRoute = require('./routes/registerRoutes');
 const logoutRoute = require('./routes/logout');
@@ -33,7 +34,7 @@ const searchRoute = require('./routes/searchRoutes');
 const messagesRoute = require('./routes/messagesRoutes');
 const notificationsRoute = require('./routes/notificationRoutes');
 
-// Api routes
+//api routes
 const postsApiRoute = require('./routes/api/posts');
 const usersApiRoute = require('./routes/api/users');
 const chatsApiRoute = require('./routes/api/chats');
